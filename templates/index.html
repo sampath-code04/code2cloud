@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Live Demo</title>
+    <!-- Using Google Fonts for a premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --success: #10b981;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 48px 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3b82f6, #ec4899, #8b5cf6);
+            background-size: 200% auto;
+            animation: gradient-flow 3s linear infinite;
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            letter-spacing: -0.025em;
+        }
+        .highlight {
+            color: var(--accent);
+        }
+        .message {
+            font-size: 1.35rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px dashed #475569;
+        }
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+        }
+        .footer-info div {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .value {
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-badge">
+            <div class="pulse"></div>
+            System Online
+        </div>
+        
+        <h1>Live <span class="highlight">DevOps</span> Deployment</h1>
+        
+        <!-- This is the Python variable mapped from app.py -->
+        <div class="message">{{ message }}</div>
+        
+        <div class="footer-info">
+            <div>
+                <span class="label">App Version</span>
+                <span class="value">v{{ version }}</span>
+            </div>
+            <div>
+                <span class="label">Environment</span>
+                <span class="value">Production</span>
+            </div>
+            <div>
+                <span class="label">Health</span>
+                <span class="value">{{ status | upper }}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
